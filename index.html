@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>渦 · Espiral de amor</title>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500;800&family=Special+Elite&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f2efe6;--ink:#0b0b0b;--dot:rgba(0,0,0,.13);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#111;--ink:#ece8dc;--dot:rgba(255,255,255,.1)}}
+:root[data-theme="dark"]{--paper:#111;--ink:#ece8dc;--dot:rgba(255,255,255,.1)}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+*{box-sizing:border-box}
+body{margin:0;height:100%;overflow:hidden;background:var(--paper);color:var(--ink);font-family:'Shippori Mincho','Times New Roman',serif;
+background-image:radial-gradient(var(--dot) 1.2px,transparent 1.4px);background-size:7px 7px}
+#spiral{position:fixed;inset:-25%;width:150%;height:150%;opacity:.13;animation:spin 90s linear infinite;pointer-events:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+#spiral path{fill:none;stroke:var(--ink);stroke-width:2.2}
+.page{position:absolute;inset:0;padding:64px 18px 78px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;
+opacity:0;pointer-events:none;transform:rotate(-2deg) scale(.96);transition:.6s;overflow:auto}
+.page.on{opacity:1;pointer-events:auto;transform:none}
+.cover h1{font-size:clamp(2.4rem,9vw,5.5rem);margin:0;font-weight:800;text-align:center;line-height:1;letter-spacing:.04em;text-shadow:3px 3px 0 var(--paper),5px 5px 0 var(--ink)}
+.kanji{font-size:clamp(7rem,32vw,17rem);font-weight:800;line-height:.9;animation:wob 4s ease-in-out infinite}
+@keyframes wob{50%{transform:rotate(3deg) scale(1.04);filter:blur(.6px)}}
+.mono{font-family:'Special Elite',monospace;letter-spacing:.15em;font-size:.85rem;text-align:center}
+.btn{font:inherit;font-weight:800;background:var(--ink);color:var(--paper);border:3px solid var(--ink);padding:12px 26px;cursor:pointer;letter-spacing:.2em;clip-path:polygon(4% 0,100% 6%,96% 100%,0 92%);transition:.2s}
+.btn:hover{transform:scale(1.07) rotate(-2deg)}
+.spread{display:grid;gap:18px;width:min(940px,100%);grid-template-columns:1fr 1fr;align-items:center}
+@media(max-width:640px){.spread{grid-template-columns:1fr}}
+.panel{position:relative;border:5px solid var(--ink);box-shadow:8px 8px 0 var(--ink);background:var(--paper);aspect-ratio:4/5;max-height:52vh;width:100%;justify-self:center;cursor:pointer;overflow:hidden;transition:.4s}
+.panel:nth-child(odd){transform:rotate(-1.6deg);clip-path:polygon(0 0,100% 3%,98% 100%,2% 97%)}
+.panel:nth-child(even){transform:rotate(1.8deg) translateY(14px)}
+.panel:hover{transform:rotate(0) scale(1.03);z-index:2}
+.panel img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(1) contrast(1.35);transition:filter .5s}
+.panel:hover img{filter:none}
+.panel .ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:20px;font-family:'Special Elite',monospace;font-size:.8rem;letter-spacing:.1em;
+background:repeating-conic-gradient(var(--dot) 0 10deg,transparent 10deg 20deg)}
+.cap{position:absolute;left:0;bottom:0;right:0;background:var(--paper);border-top:4px solid var(--ink);padding:8px 12px;font-size:.9rem;font-weight:500}
+.sfx{position:absolute;top:-4px;right:6px;font-size:1.7rem;font-weight:800;transform:rotate(8deg);text-shadow:2px 2px 0 var(--paper);z-index:3;pointer-events:none;color:var(--ink);-webkit-text-stroke:1px var(--paper)}
+.letter{align-self:stretch;justify-content:flex-start}
+.paper{max-width:640px;width:100%;margin:auto;background:var(--paper);border:5px solid var(--ink);box-shadow:10px 10px 0 var(--ink);padding:30px 28px;position:relative}
+.paper h2{margin:0 0 14px;font-size:1.9rem;font-weight:800;border-bottom:4px double var(--ink);padding-bottom:8px}
+.paper p{font-size:1.08rem;line-height:1.85;margin:0 0 14px;opacity:0;transform:translateY(12px);filter:blur(4px);transition:1.1s}
+.letter.on .paper p{opacity:1;transform:none;filter:none}
+.sign{text-align:right;font-weight:800;font-size:1.3rem}
+.nav{position:fixed;left:0;right:0;bottom:0;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));display:flex;justify-content:center;align-items:center;gap:14px;z-index:10;background:linear-gradient(transparent,var(--paper) 55%)}
+.nav .btn{padding:8px 18px}
+#dots{font-family:'Special Elite',monospace;letter-spacing:.3em;min-width:4.5em;text-align:center}
+.top{position:fixed;top:calc(10px + env(safe-area-inset-top,0px));right:12px;z-index:10;display:flex;gap:8px}
+.top .btn{padding:6px 12px;font-size:.8rem;letter-spacing:.1em}
+.vignette{position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle,transparent 55%,rgba(0,0,0,.35));z-index:5}
+.eyes{display:flex;gap:10px}.eye{width:46px;height:46px;border:4px solid var(--ink);border-radius:50%;background:var(--paper);position:relative;overflow:hidden;box-shadow:3px 3px 0 var(--ink)}.eye i{position:absolute;width:22px;height:22px;background:var(--ink);border-radius:50%;left:8px;top:8px;transition:transform .08s}
+.eye i::after{content:"";position:absolute;width:6px;height:6px;background:var(--paper);border-radius:50%;left:5px;top:4px}
+.drip{position:fixed;top:0;left:0;width:100%;height:46px;z-index:6;pointer-events:none;fill:var(--ink);transform-origin:top;animation:dr 7s ease-in-out infinite}
+@keyframes dr{0%,100%{transform:scaleY(.55)}50%{transform:scaleY(1.15)}}
+.glitch{animation:gl .25s steps(2) 2}
+@keyframes gl{50%{transform:translate(4px,-3px) skewX(3deg);filter:invert(1)}}
+</style>
+</head>
+<body>
+<svg id="spiral" viewBox="-100 -100 200 200"><path id="sp"/></svg>
+<svg class="drip" viewBox="0 0 100 30" preserveAspectRatio="none"><path d="M0 0H100V4H83q-2 0-2 3V20q0 3-2 3t-2-3V7q0-3-2-3H61q-2 0-2 3V14q0 2-2 2t-2-2V7q0-3-2-3H38q-2 0-2 3V24q0 3-2 3t-2-3V7q0-3-2-3H15q-2 0-2 3V12q0 2-2 2t-2-2V7q0-3-2-3H0Z"/></svg>
+<div class="vignette"></div>
+
+<div class="top">
+  <button class="btn" id="music">♪ MÚSICA</button>
+</div>
+<input type="file" id="pf" accept="image/*" hidden>
+<audio id="au" loop></audio>
+
+<main id="book"></main>
+
+<div class="nav">
+  <button class="btn" id="prev">◀</button>
+  <span id="dots"></span>
+  <button class="btn" id="next">▶</button>
+</div>
+
+<script>
+
+const CONFIG={
+  titulo:"Espiral de Amor",
+  para:"Para ti, mi amor",
+  nombres:"LY &amp; RU",
+  musica:"Mass Of Fermenting Dregs - 青い、濃い、橙色の日 ( Blue, dense orange day ) ENG SUBS.mp3",
+  fotos:[
+    {src:"WhatsApp Image 2026-09-30 at 7.07.04 PM (1).jpeg",txt:"Nuestra primer datecine",sfx:"ドキ"},
+    {src:"WhatsApp Image 2026-09-30 at 7.07.05 PM (4).jpeg",txt:"Tiki toki acostaditos",sfx:""},
+    {src:"WhatsApp Image 2026-09-30 at 7.07.04 PM (2).jpeg",txt:"Nuestro primer picnic",sfx:""},
+    {src:"WhatsApp Image 2026-09-30 at 7.07.04 PM (3).jpeg",txt:"Comence a visitarte casi a diario",sfx:""},
+    {src:"WhatsApp Image 2026-09-30 at 7.36.47 PM.jpeg",txt:"Mi lugar favorito eres tú",sfx:"ドキドキ"},
+    {src:"WhatsApp Image 2026-09-30 at 7.07.04 PM.jpeg",txt:"playita y caribe",sfx:""},
+    {src:"WhatsApp Image 2026-09-30 at 7.07.05 PM.jpeg",txt:"Tu primer visita en mi casita",sfx:""},
+    {src:"WhatsApp Image 2026-09-30 at 7.07.05 PM (2).jpeg",txt:"Siempre tú, siempre nosotros",sfx:"ずっと"},
+    {src:"WhatsApp Image 2026-09-30 at 7.07.05 PM (1).jpeg",txt:"Y lo que falta por vivir",sfx:"♥"}
+  ],
+  carta:[
+    "Mi amor:",
+    "Desde que llegaste, mi vida gira a tu alrededor, como una espiral de la que no quiero ni puedo escapar. Y lo mejor es que no tengo miedo: contigo, caer cada vez más hondo es lo más hermoso que me ha pasado.",
+    "Amarte es mi droga y adiccion de la cual no quiero medicina porque eso significaria perderte, y yo si Ti no VIVO MY LOVE",
+    "Te amo hoy, mañana y en cada vuelta de esta espiral infinita."
+  ],
+  firma:"— Tu eterno enamorado Ru♥"
+};
+/* ======================================================== */
+
+const $=s=>document.querySelector(s);
+// espiral
+(()=>{let d="M0 0";for(let a=0;a<60;a+=.08){const r=a*1.6;d+=` L${(Math.cos(a)*r).toFixed(1)} ${(Math.sin(a)*r).toFixed(1)}`}$("#sp").setAttribute("d",d)})();
+
+const book=$("#book"),pages=[];
+function add(html,cls=""){const s=document.createElement("section");s.className="page "+cls;s.innerHTML=html;book.appendChild(s);pages.push(s);return s}
+
+add(`<div class="eyes"><div class="eye"><i></i></div><div class="eye"><i></i></div><div class="eye"><i></i></div></div><div class="kanji">渦</div><h1>${CONFIG.titulo}</h1><div class="mono">${CONFIG.nombres}</div><div class="mono">— ${CONFIG.para} —</div><button class="btn" id="open">ABRIR ♥</button>`,"cover");
+
+let pi=0;
+for(let i=0;i<CONFIG.fotos.length;i+=2){
+  const pn=CONFIG.fotos.slice(i,i+2).map((f,k)=>`<div class="panel" data-i="${i+k}"><span class="sfx">${f.sfx||""}</span>${f.src?`<img src="${f.src}" alt="">`:`<div class="ph">[ CLIC PARA PONER FOTO ]</div>`}<div class="cap">${f.txt}</div></div>`).join("");
+  add(`<div class="mono">— CAPÍTULO ${++pi} —</div><div class="spread">${pn}</div>`);
+}
+add(`<div class="paper"><h2>${CONFIG.para}</h2>${CONFIG.carta.map(t=>`<p>${t}</p>`).join("")}<p class="sign">${CONFIG.firma}</p></div>`,"letter");
+
+// carta: aparición progresiva
+function reveal(p){p.querySelectorAll("p").forEach((e,i)=>e.style.transitionDelay=(i*1.1+.3)+"s")}
+reveal(pages[pages.length-1]);
+
+let cur=0;
+function go(n){
+  if(n<0||n>=pages.length)return;
+  pages[cur].classList.remove("on");cur=n;
+  pages[cur].classList.add("on");
+  pages[cur].scrollTop=0;
+  book.classList.remove("glitch");void book.offsetWidth;book.classList.add("glitch");
+  $("#dots").textContent=(cur+1)+"/"+pages.length;
+  $("#prev").style.visibility=cur?"visible":"hidden";
+  $("#next").style.visibility=cur<pages.length-1?"visible":"hidden";
+}
+$("#prev").onclick=()=>go(cur-1);
+$("#next").onclick=()=>go(cur+1);
+addEventListener("keydown",e=>{if(e.key==="ArrowRight")go(cur+1);if(e.key==="ArrowLeft")go(cur-1)});
+let sx=null;
+addEventListener("touchstart",e=>sx=e.touches[0].clientX,{passive:true});
+addEventListener("touchend",e=>{if(sx===null)return;const d=e.changedTouches[0].clientX-sx;if(Math.abs(d)>70)go(cur+(d<0?1:-1));sx=null});
+
+// audio
+const au=$("#au");let playing=false;
+if(CONFIG.musica)au.src=CONFIG.musica;
+function play(){if(!au.src)return;au.play().then(()=>{playing=true;$("#music").textContent="❚❚ MÚSICA"}).catch(()=>{})}
+$("#music").onclick=()=>{if(!au.src)return;if(playing){au.pause();playing=false;$("#music").textContent="♪ MÚSICA"}else play()};
+$("#open").onclick=()=>{play();go(1)};
+
+// fotos: clic para cargar
+let target=null;
+book.addEventListener("click",e=>{const p=e.target.closest(".panel");if(p){target=p;$("#pf").click()}});
+$("#pf").onchange=e=>{const f=e.target.files[0];if(!f||!target)return;
+  const u=URL.createObjectURL(f);let im=target.querySelector("img");
+  if(!im){target.querySelector(".ph")?.remove();im=document.createElement("img");target.insertBefore(im,target.querySelector(".cap"))}
+  im.src=u;e.target.value=""};
+
+function look(x,y){document.querySelectorAll(".eye").forEach(e=>{const b=e.getBoundingClientRect(),a=Math.atan2(y-b.top-b.height/2,x-b.left-b.width/2);e.firstChild.style.transform=`translate(${Math.cos(a)*10}px,${Math.sin(a)*10}px)`})}
+addEventListener("mousemove",e=>look(e.clientX,e.clientY));
+addEventListener("touchmove",e=>look(e.touches[0].clientX,e.touches[0].clientY),{passive:true});
+pages[0].classList.add("on");go(0);
+</script>
+</body>
+</html>
